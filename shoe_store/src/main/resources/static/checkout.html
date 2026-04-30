@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Thanh toán - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-surface-container-low text-on-surface font-body">
+    <main class="py-16 px-8 max-w-[1200px] mx-auto min-h-screen">
+        <div class="mb-16 text-center">
+            <a href="/" class="text-3xl font-black italic tracking-tighter text-stone-900 font-headline inline-block mb-4">Shoeshop</a>
+            <h1 class="font-headline text-4xl font-bold italic uppercase tracking-tight">Thanh toán đơn hàng</h1>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <!-- Checkout Form -->
+            <div class="lg:col-span-3 space-y-10">
+                <section class="bg-white rounded-[2.5rem] p-10 shadow-sm">
+                    <h2 class="font-headline text-xl font-bold uppercase tracking-widest mb-8 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs">1</span>
+                        Thông tin giao hàng
+                    </h2>
+                    <form id="checkoutForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Họ và tên</label>
+                            <input type="text" id="ho_ten" required
+                                class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                placeholder="Nguyễn Văn A">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Số điện thoại</label>
+                            <input type="tel" id="so_dien_thoai" required
+                                class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                placeholder="0901234567">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Email</label>
+                            <input type="email" id="email" required
+                                class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                placeholder="your@email.com">
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Địa chỉ nhận hàng</label>
+                            <textarea id="dia_chi" required rows="3"
+                                class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Ghi chú (tùy chọn)</label>
+                            <input type="text" id="ghi_chu"
+                                class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                placeholder="Lời nhắn cho shipper...">
+                        </div>
+                    </form>
+                </section>
+
+                <section class="bg-white rounded-[2.5rem] p-10 shadow-sm">
+                    <h2 class="font-headline text-xl font-bold uppercase tracking-widest mb-8 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs">2</span>
+                        Phương thức thanh toán
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="relative flex items-center gap-4 p-6 rounded-2xl border-2 border-primary bg-primary/5 cursor-pointer">
+                            <input type="radio" name="payment" value="cod" checked class="text-primary focus:ring-primary w-5 h-5">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-sm">Thanh toán khi nhận hàng (COD)</span>
+                                <span class="text-[10px] text-outline uppercase tracking-widest">Giao hàng và thu tiền tại nhà</span>
+                            </div>
+                        </label>
+                        <label class="relative flex items-center gap-4 p-6 rounded-2xl border-2 border-outline-variant/30 cursor-not-allowed opacity-50">
+                            <input type="radio" name="payment" value="bank" disabled class="text-stone-300 w-5 h-5">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-sm">Chuyển khoản ngân hàng</span>
+                                <span class="text-[10px] text-outline uppercase tracking-widest">Sắp ra mắt</span>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="lg:col-span-2">
+                <div class="bg-on-surface text-white rounded-[2.5rem] p-10 sticky top-16 overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+                    
+                    <h2 class="font-headline text-2xl font-bold italic mb-10 pb-4 border-b border-white/10 relative z-10">Tóm tắt đơn hàng</h2>
+                    
+                    <div id="checkoutItems" class="space-y-6 mb-10 relative z-10 max-h-[300px] overflow-y-auto pr-4 custom-scrollbar">
+                        <!-- Items load here -->
+                    </div>
+
+                    <div class="space-y-4 mb-10 relative z-10 pt-6 border-t border-white/10">
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-[0.2em] text-stone-400">
+                            <span>Tạm tính</span>
+                            <span id="subtotal">0đ</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-bold uppercase tracking-[0.2em] text-stone-400">
+                            <span>Phí giao hàng</span>
+                            <span class="text-primary-fixed uppercase">Miễn phí</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-10 relative z-10">
+                        <span class="font-headline font-bold text-xl uppercase tracking-tighter italic">Tổng cộng</span>
+                        <span id="total" class="font-headline font-bold text-4xl italic">0đ</span>
+                    </div>
+
+                    <button onclick="submitOrder()" id="orderBtn"
+                        class="w-full bg-white text-on-surface font-headline font-bold py-6 rounded-2xl shadow-xl hover:bg-primary-fixed hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest relative z-10">
+                        Đặt hàng ngay
+                    </button>
+                    
+                    <p class="text-[10px] text-center text-stone-500 mt-8 font-bold uppercase tracking-widest relative z-10">Đảm bảo an toàn 100% khi thanh toán</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script>
+        async function loadCheckout() {
+            const res = await fetch('/api/cart');
+            const data = await res.json();
+            const items = data.items || data.cart || [];
+            if (items.length === 0) { window.location.href = '/cart'; return; }
+
+            let total = 0;
+            document.getElementById('checkoutItems').innerHTML = items.map(item => {
+                const price = item.gia_km || item.gia;
+                total += price * item.so_luong;
+                return `
+                <div class="flex gap-4 items-center">
+                    <div class="w-16 h-16 bg-white/5 rounded-xl p-2 shrink-0">
+                        <img src="${item.hinh_anh || '/uploads/placeholder.jpg'}" class="w-full h-full object-contain">
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-sm font-bold line-clamp-1">${item.ten_sp}</h4>
+                        <p class="text-[10px] text-stone-500 uppercase font-bold tracking-widest">Size: ${item.size} | SL: ${item.so_luong}</p>
+                    </div>
+                    <div class="text-sm font-bold">${formatPrice(price * item.so_luong)}</div>
+                </div>`;
+            }).join('');
+
+            document.getElementById('subtotal').textContent = formatPrice(total);
+            document.getElementById('total').textContent = formatPrice(total);
+
+            // Pre-fill user data
+            fetch('/api/auth/me').then(res => res.json()).then(data => {
+                if (data.user) {
+                    document.getElementById('ho_ten').value = data.user.ho_ten || '';
+                    document.getElementById('email').value = data.user.email || '';
+                    document.getElementById('so_dien_thoai').value = data.user.so_dien_thoai || '';
+                    document.getElementById('dia_chi').value = data.user.dia_chi || '';
+                }
+            });
+        }
+
+        async function submitOrder() {
+            const btn = document.getElementById('orderBtn');
+            const form = {
+                ho_ten: document.getElementById('ho_ten').value,
+                email: document.getElementById('email').value,
+                so_dien_thoai: document.getElementById('so_dien_thoai').value,
+                dia_chi: document.getElementById('dia_chi').value,
+                ghi_chu: document.getElementById('ghi_chu').value,
+                phuong_thuc_tt: 'cod'
+            };
+
+            if (!form.ho_ten || !form.email || !form.so_dien_thoai || !form.dia_chi) {
+                alert('Vui lòng điền đầy đủ thông tin giao hàng');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-2 border-on-surface border-t-transparent mx-auto"></div>';
+
+            try {
+                const response = await fetch('/api/orders/checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        dia_chi_giao_hang: form.dia_chi,
+                        ghi_chu: form.ghi_chu
+                    })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    window.location.href = `/orders?id=${data.orderId}&success=true`;
+                } else {
+                    alert(data.message || 'Có lỗi xảy ra khi đặt hàng');
+                    btn.disabled = false;
+                    btn.textContent = 'Đặt hàng ngay';
+                }
+            } catch (err) {
+                alert('Lỗi kết nối server');
+                btn.disabled = false;
+                btn.textContent = 'Đặt hàng ngay';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCheckout);
+    </script>
+</body>
+</html>

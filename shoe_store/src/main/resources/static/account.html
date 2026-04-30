@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Tài khoản của tôi - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body">
+    <!-- Header -->
+    <header class="sticky top-0 w-full z-50 glass-nav shadow-sm">
+        <nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+            <div class="text-2xl font-black italic tracking-tighter text-stone-900 font-headline">
+                <a href="/">Shoeshop</a>
+            </div>
+            <a href="/" class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors">Quay lại mua sắm</a>
+        </nav>
+    </header>
+
+    <main class="py-16 px-8 max-w-[1000px] mx-auto min-h-screen">
+        <div class="flex flex-col md:flex-row gap-12">
+            <!-- Sidebar -->
+            <div class="w-full md:w-64 space-y-2">
+                <div class="p-8 bg-on-surface text-white rounded-3xl mb-8">
+                    <div id="userInitial" class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-3xl font-black mb-4 italic shadow-lg shadow-primary/20">S</div>
+                    <h2 id="userName" class="font-headline text-xl font-bold line-clamp-1 italic">...</h2>
+                    <p id="userEmail" class="text-xs text-stone-400 line-clamp-1">...</p>
+                </div>
+                
+                <nav class="space-y-1">
+                    <button class="w-full text-left px-6 py-4 rounded-2xl bg-primary text-white font-bold text-sm transition-all shadow-lg shadow-primary/20">Hồ sơ cá nhân</button>
+                    <button onclick="window.location.href='/orders'" class="w-full text-left px-6 py-4 rounded-2xl hover:bg-surface-container-high font-bold text-sm text-outline hover:text-on-surface transition-all">Lịch sử đơn hàng</button>
+                    <button onclick="logout()" class="w-full text-left px-6 py-4 rounded-2xl hover:bg-error/10 font-bold text-sm text-error transition-all">Đăng xuất</button>
+                </nav>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-grow">
+                <section class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-outline-variant/10">
+                    <h1 class="font-headline text-3xl font-black italic uppercase tracking-tight mb-10">Cài đặt tài khoản</h1>
+                    
+                    <form id="profileForm" class="space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Họ và tên</label>
+                                <input type="text" id="ho_ten" required
+                                    class="w-full bg-surface-container-low border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                    placeholder="Họ tên của bạn">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Số điện thoại</label>
+                                <input type="tel" id="so_dien_thoai"
+                                    class="w-full bg-surface-container-low border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                    placeholder="0901234567">
+                            </div>
+                            <div class="md:col-span-2 space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-outline ml-1">Địa chỉ giao hàng</label>
+                                <textarea id="dia_chi" rows="3"
+                                    class="w-full bg-surface-container-low border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary outline-none"
+                                    placeholder="Địa chỉ mặc định của bạn"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-outline-variant/10">
+                            <button type="submit" id="saveBtn"
+                                class="primary-gradient text-white font-headline font-bold px-10 py-5 rounded-2xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest">
+                                Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script>
+        async function loadProfile() {
+            try {
+                const res = await fetch('/api/auth/me');
+                if (res.status === 401) { window.location.href = '/login'; return; }
+                const data = await res.json();
+                const user = data.user;
+
+                document.getElementById('userName').textContent = user.ho_ten;
+                document.getElementById('userEmail').textContent = user.email;
+                document.getElementById('userInitial').textContent = user.ho_ten.charAt(0);
+                
+                document.getElementById('ho_ten').value = user.ho_ten || '';
+                document.getElementById('so_dien_thoai').value = user.sdt || '';
+                document.getElementById('dia_chi').value = user.dia_chi || '';
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function logout() {
+            await fetch('/api/auth/logout', { method: 'POST' });
+            window.location.href = '/';
+        }
+
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('saveBtn');
+            const form = {
+                ho_ten: document.getElementById('ho_ten').value,
+                so_dien_thoai: document.getElementById('so_dien_thoai').value,
+                dia_chi: document.getElementById('dia_chi').value
+            };
+
+            btn.disabled = true;
+            btn.textContent = 'Đang lưu...';
+
+            try {
+                const res = await fetch('/api/auth/profile', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(form)
+                });
+                if (res.ok) {
+                    showToast('Cập nhật hồ sơ thành công!', 'success');
+                    loadProfile();
+                } else {
+                    const data = await res.json();
+                    showToast(data.message || 'Lỗi cập nhật hồ sơ', 'error');
+                }
+            } catch (err) {
+                showToast('Lỗi kết nối server', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Lưu thay đổi';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Đăng ký - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-surface-container-low text-on-surface font-body min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-md glass-card rounded-3xl p-8 shadow-2xl overflow-hidden relative">
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10">
+            <div class="text-center mb-8">
+                <a href="/" class="text-3xl font-black italic tracking-tighter text-stone-900 font-headline inline-block mb-2">Shoeshop</a>
+                <p class="text-outline text-sm uppercase tracking-widest font-label font-bold">Tham gia cộng đồng của chúng tôi</p>
+            </div>
+
+            <div id="alert" class="hidden mb-6 p-4 rounded-xl text-sm font-bold"></div>
+
+            <form id="registerForm" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">Họ và tên</label>
+                    <input type="text" id="ho_ten" required
+                        class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-3.5 focus:ring-2 focus:ring-primary transition-all outline-none"
+                        placeholder="Nguyễn Văn A">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">Email</label>
+                    <input type="email" id="email" required
+                        class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-3.5 focus:ring-2 focus:ring-primary transition-all outline-none"
+                        placeholder="your@email.com">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">Mật khẩu</label>
+                    <div class="relative">
+                        <input type="password" id="password" required
+                            class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-3.5 focus:ring-2 focus:ring-primary transition-all outline-none"
+                            placeholder="••••••••">
+                        <button type="button" onclick="togglePassword('password')"
+                            class="absolute right-6 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors">
+                            visibility_off
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-outline ml-1">Xác nhận mật khẩu</label>
+                    <div class="relative">
+                        <input type="password" id="confirm_password" required
+                            class="w-full bg-surface-container-highest border-none rounded-2xl px-6 py-3.5 focus:ring-2 focus:ring-primary transition-all outline-none"
+                            placeholder="••••••••">
+                        <button type="button" onclick="togglePassword('confirm_password')"
+                            class="absolute right-6 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline hover:text-on-surface transition-colors">
+                            visibility_off
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn"
+                    class="w-full primary-gradient text-white font-headline font-bold py-5 rounded-2xl shadow-lg hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest mt-4">
+                    Tạo tài khoản
+                </button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-outline text-sm">Đã có tài khoản? 
+                    <a href="/login" class="text-primary font-bold hover:underline">Đăng nhập</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const btn = event.currentTarget;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'visibility';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'visibility_off';
+            }
+        }
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.classList.remove('hidden', 'bg-error/10', 'text-error', 'bg-secondary/10', 'text-secondary');
+            
+            if (type === 'error') {
+                alert.classList.add('bg-error/10', 'text-error');
+            } else {
+                alert.classList.add('bg-secondary/10', 'text-secondary');
+            }
+            alert.classList.remove('hidden');
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const ho_ten = document.getElementById('ho_ten').value;
+            const email = document.getElementById('email').value;
+            const mat_khau = document.getElementById('password').value;
+            const confirm_password = document.getElementById('confirm_password').value;
+            
+            if (mat_khau !== confirm_password) {
+                showAlert('Mật khẩu xác nhận không khớp', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="flex items-center justify-center gap-2"><div class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div> Đang xử lý...</div>';
+            
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ho_ten, email, mat_khau })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('Đăng ký thành công! Đang chuyển hướng...', 'success');
+                    setTimeout(() => window.location.href = '/login', 1500);
+                } else {
+                    showAlert(data.message || 'Đăng ký thất bại', 'error');
+                }
+            } catch (error) {
+                showAlert('Lỗi kết nối server', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Tạo tài khoản';
+            }
+        });
+
+        // Check auth
+        fetch('/api/auth/me').then(res => res.json()).then(data => {
+            if (data.user) window.location.href = '/';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Danh mục sản phẩm - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            safelist: ['hover:bg-primary', 'hover:text-white', 'group-hover:opacity-100', 'group-hover:translate-y-0', 'bg-primary', 'text-white'],
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+
+        .speed-skew {
+            transform: skewX(-5deg);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body">
+    <!-- Header -->
+    <header class="sticky top-0 w-full z-50 glass-nav shadow-sm">
+        <nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+            <div class="text-2xl font-black italic tracking-tighter text-stone-900 font-headline">
+                <a href="/">Shoeshop</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 font-label text-sm uppercase tracking-wider">
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=running">Chạy bộ</a>
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=training">Luyện tập</a>
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=lifestyle">Đời sống</a>
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=performance">Hiệu suất</a>
+            </div>
+            <div class="flex items-center space-x-6">
+                <button id="cartBtn" onclick="openCartModal()" class="material-symbols-outlined text-stone-900 hover:scale-105 transition-transform relative">
+                    shopping_cart
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+                <div id="userMenu"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-16 px-8 max-w-[1440px] mx-auto">
+        <div class="mb-12">
+            <h1 id="categoryTitle" class="font-headline text-5xl font-bold italic mb-4">Sản phẩm</h1>
+            <p id="categoryDesc" class="text-outline max-w-2xl">Khám phá bộ sưu tập giày thể thao đa dạng, từ giày chạy bộ chuyên dụng đến sneaker thời trang hàng ngày.</p>
+        </div>
+
+        <!-- Filters & Sort -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10 pb-6 border-b border-outline-variant/30">
+            <div class="flex items-center gap-6">
+                <select id="sortSelect" onchange="loadCategoryProducts()" class="bg-surface-container-highest border-none rounded-xl px-4 py-2 text-sm font-bold tracking-tight outline-none focus:ring-2 focus:ring-primary">
+                    <option value="newest">Mới nhất</option>
+                    <option value="price_asc">Giá: Thấp đến Cao</option>
+                    <option value="price_desc">Giá: Cao đến Thấp</option>
+                    <option value="popular">Phổ biến nhất</option>
+                </select>
+            </div>
+            <div class="text-sm font-medium text-outline">
+                Hiển thị <span id="productCount" class="text-on-surface font-bold">0</span> sản phẩm
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="col-span-full py-20 flex justify-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="mt-20 flex justify-center gap-2"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-inverse-surface text-white py-20 px-8">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-3xl font-black italic tracking-tighter mb-6 font-headline">Shoeshop</div>
+                <p class="text-stone-400 max-w-sm mb-8 leading-relaxed">Nâng tầm phong cách và hiệu suất của bạn với những đôi giày tốt nhất. Chúng tôi mang đến sự kết hợp hoàn hảo giữa công nghệ và thời trang.</p>
+                <div class="flex space-x-4">
+                    <div class="w-10 h-10 rounded-full border border-stone-700 flex items-center justify-center hover:border-primary hover:text-primary transition-colors cursor-pointer"><i class="fab fa-facebook-f"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-stone-700 flex items-center justify-center hover:border-primary hover:text-primary transition-colors cursor-pointer"><i class="fab fa-instagram"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-stone-700 flex items-center justify-center hover:border-primary hover:text-primary transition-colors cursor-pointer"><i class="fab fa-twitter"></i></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-headline font-bold mb-6 uppercase tracking-widest text-sm">Khám phá</h4>
+                <ul class="space-y-4 text-stone-400 text-sm">
+                    <li><a href="/products?type=running" class="hover:text-primary transition-colors">Giày chạy bộ</a></li>
+                    <li><a href="/products?type=training" class="hover:text-primary transition-colors">Giày tập luyện</a></li>
+                    <li><a href="/products?type=lifestyle" class="hover:text-primary transition-colors">Thời trang đời sống</a></li>
+                    <li><a href="/products?type=performance" class="hover:text-primary transition-colors">Dòng hiệu suất</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-headline font-bold mb-6 uppercase tracking-widest text-sm">Hỗ trợ</h4>
+                <ul class="space-y-4 text-stone-400 text-sm">
+                    <li><a href="#" class="hover:text-primary transition-colors">Trung tâm trợ giúp</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Chính sách vận chuyển</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Đổi trả & Hoàn tiền</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Điều khoản dịch vụ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-[1440px] mx-auto mt-20 pt-10 border-t border-stone-800 flex flex-col md:row justify-between items-center gap-6 text-xs text-stone-500 uppercase tracking-widest">
+            <div>&copy; 2024 Shoeshop. All rights reserved.</div>
+            <div class="flex gap-8">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+        <!-- Product Detail Modal -->
+    <div id="productModal" class="fixed inset-0 z-[110] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeProductModal()"></div>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-auto max-h-[90vh] bg-background rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row transform transition-all duration-500 scale-95 opacity-0" id="productModalContent">
+            <button onclick="closeProductModal()" class="absolute top-8 right-8 z-20 w-12 h-12 rounded-full bg-stone-900 text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-2xl">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="w-full md:w-1/2 bg-surface-container-low p-12 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+                <img id="modalProductImg" src="" class="w-full h-auto object-contain relative z-10 drop-shadow-2xl hover:scale-110 transition-transform duration-700">
+            </div>
+            <div class="w-full md:w-1/2 p-12 overflow-y-auto custom-scrollbar">
+                <div class="mb-8">
+                    <p id="modalProductCat" class="text-[10px] font-black uppercase tracking-[0.3em] text-outline mb-2"></p>
+                    <h2 id="modalProductName" class="font-headline text-4xl font-black italic leading-tight mb-4"></h2>
+                    <div class="flex items-center gap-4">
+                        <span id="modalProductPrice" class="text-3xl font-black text-primary italic"></span>
+                        <span id="modalProductOldPrice" class="text-lg text-outline line-through"></span>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-[10px] font-black uppercase tracking-widest text-outline mb-4">Chọn Kích thước</h4>
+                        <div id="modalSizeGrid" class="grid grid-cols-4 gap-3">
+                            <!-- Sizes load here -->
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-[10px] font-black uppercase tracking-widest text-outline mb-4">Mô tả sản phẩm</h4>
+                        <p id="modalProductDesc" class="text-sm leading-relaxed text-stone-600"></p>
+                    </div>
+                    <div class="pt-8 border-t border-outline-variant/20 flex gap-4">
+                        <div class="flex items-center bg-stone-100 rounded-2xl px-4">
+                            <button onclick="updateModalQty(-1)" class="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors font-bold">-</button>
+                            <input id="modalQty" type="number" value="1" min="1" class="w-12 bg-transparent border-none text-center font-bold outline-none focus:ring-0">
+                            <button onclick="updateModalQty(1)" class="w-8 h-8 flex items-center justify-center hover:text-primary transition-colors font-bold">+</button>
+                        </div>
+                        <button id="modalAddToCartBtn" class="flex-grow bg-primary text-white font-headline font-black py-5 rounded-2xl shadow-xl hover:bg-stone-900 transition-all uppercase tracking-widest">
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCartModal()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-background shadow-2xl p-8 flex flex-col transform translate-x-full transition-transform duration-500 ease-out" id="cartContent">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="font-headline text-3xl font-bold italic">Giỏ hàng</h2>
+                <button onclick="closeCartModal()" class="material-symbols-outlined text-stone-400 hover:text-on-surface transition-colors">close</button>
+            </div>
+            <div id="cartItems" class="flex-grow overflow-y-auto space-y-6 pr-4 custom-scrollbar">
+                <!-- Cart items load here -->
+            </div>
+            <div class="mt-8 pt-8 border-t border-outline-variant/30">
+                <div class="flex justify-between items-center mb-8">
+                    <span class="text-outline uppercase tracking-widest text-xs font-bold">Tổng cộng</span>
+                    <span id="cartTotal" class="font-headline text-2xl font-bold">0đ</span>
+                </div>
+                <button onclick="window.location.href='/checkout'" class="w-full primary-gradient text-white font-headline font-bold py-5 rounded-2xl shadow-lg hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest">
+                    Thanh toán ngay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Category Definitions
+        const categories = {
+            'running': { title: 'Chạy bộ', desc: 'Được thiết kế để phá vỡ mọi kỷ lục. Công nghệ đệm tiên tiến giúp bạn tiến xa hơn, nhanh hơn.' },
+            'training': { title: 'Luyện tập', desc: 'Sự ổn định và linh hoạt cho mọi bài tập. Từ HIIT đến cử tạ, chúng tôi đồng hành cùng bạn.' },
+            'lifestyle': { title: 'Đời sống', desc: 'Sự giao thoa hoàn hảo giữa phong cách và sự thoải mái. Tự tin thể hiện cá tính mỗi ngày.' },
+            'performance': { title: 'Hiệu suất', desc: 'Đẩy cao giới hạn bản thân. Những dòng giày kỹ thuật cao dành cho vận động viên chuyên nghiệp.' }
+        };
+
+        async function loadCategoryProducts() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type') || 'all';
+            const sort = urlParams.get('sort') || document.getElementById('sortSelect').value;
+            const page = urlParams.get('page') || 1;
+
+            if (sort) document.getElementById('sortSelect').value = sort;
+
+            const categoryInfo = categories[type] || { title: 'Sản phẩm', desc: 'Tất cả sản phẩm giày Shoeshop.' };
+            document.getElementById('categoryTitle').textContent = categoryInfo.title;
+            document.getElementById('categoryDesc').textContent = categoryInfo.desc;
+            document.title = `${categoryInfo.title} - Shoeshop`;
+
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '<div class="col-span-full py-20 flex justify-center"><div class="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div></div>';
+
+            try {
+                let searchTerm = '';
+                // Specific brand mapping for demo
+                if (type === 'running') searchTerm = 'Nike';
+                else if (type === 'training') searchTerm = 'Adidas';
+                else if (type === 'lifestyle') searchTerm = 'Vans';
+                else if (type === 'performance') searchTerm = 'Puma';
+                
+                const response = await fetch(`/api/products?search=${searchTerm}&sort=${sort}&page=${page}&limit=12`);
+                const data = await response.json();
+                
+                document.getElementById('productCount').textContent = data.pagination.total;
+                
+                if (data.products.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full py-20 text-center text-outline">Không tìm thấy sản phẩm nào.</div>';
+                    return;
+                }
+
+                grid.innerHTML = data.products.map(product => {
+                    const price = formatPrice(product.gia_km || product.gia);
+                    const oldPrice = product.gia_km ? `<span class="text-xs text-outline line-through ml-2">${formatPrice(product.gia)}</span>` : '';
+                    const img = product.hinh_anh || '/uploads/placeholder.jpg';
+                    const link = `/product/${product.slug}`;
+                    
+                    return `
+                        <div class="group cursor-pointer" onclick="openProductModal(${product.id})">
+                            <div class="relative aspect-[4/5] bg-surface-container-low rounded-2xl p-8 flex items-center justify-center overflow-hidden mb-6 transition-all duration-500 group-hover:shadow-2xl">
+                                ${product.gia_km ? '<div class="absolute top-6 left-6 speed-skew bg-secondary text-on-secondary px-3 py-1 font-label text-[10px] font-bold uppercase tracking-tighter z-10">SALE</div>' : ''}
+                                <img src="${img}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700">
+                                <button onclick="event.stopPropagation(); openProductModal(${product.id})" class="absolute bottom-6 right-6 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white">
+                                    <span class="material-symbols-outlined">add_shopping_cart</span>
+                                </button>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-[10px] font-bold text-outline uppercase tracking-[0.2em]">${product.ten_danh_muc || 'Thể thao'}</p>
+                                <h3 class="font-headline font-bold text-lg group-hover:text-primary transition-colors line-clamp-1">${product.ten_sp}</h3>
+                                <div class="flex items-center">
+                                    <span class="font-bold text-on-surface">${price}</span>
+                                    ${oldPrice}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                renderPagination(data.pagination);
+            } catch (err) {
+                console.error(err);
+                grid.innerHTML = '<div class="col-span-full py-20 text-center text-error">Đã xảy ra lỗi khi tải sản phẩm.</div>';
+            }
+        }
+
+        function renderPagination(pagination) {
+            const container = document.getElementById('pagination');
+            if (pagination.totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            for (let i = 1; i <= pagination.totalPages; i++) {
+                const activeClass = i == pagination.page ? 'bg-primary text-white' : 'bg-surface-container-highest text-on-surface hover:bg-primary/10';
+                html += `<button onclick="changePage(${i})" class="w-10 h-10 rounded-xl font-bold text-sm transition-all ${activeClass}">${i}</button>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function changePage(page) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            window.history.pushState({}, '', url);
+            loadCategoryProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cart Modal logic
+        function openCartModal() {
+            const modal = document.getElementById('cartModal');
+            const content = document.getElementById('cartContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => content.classList.remove('translate-x-full'), 10);
+            updateCartUI();
+        }
+
+        function closeCartModal() {
+            const content = document.getElementById('cartContent');
+            content.classList.add('translate-x-full');
+            setTimeout(() => document.getElementById('cartModal').classList.add('hidden'), 500);
+        }
+
+        async function updateCartUI() {
+            const container = document.getElementById('cartItems');
+            if (!container) return;
+            
+            try {
+                const res = await fetch('/api/cart');
+                const data = await res.json();
+                const items = data.items || data.cart || [];
+                
+                if (items.length === 0) {
+                    container.innerHTML = '<div class="text-center py-10 text-outline">Giỏ hàng trống</div>';
+                    document.getElementById('cartTotal').textContent = '0đ';
+                    return;
+                }
+
+                let total = 0;
+                container.innerHTML = items.map(item => {
+                    const price = item.gia_km || item.gia;
+                    total += price * item.so_luong;
+                    const img = item.hinh_anh || '/uploads/placeholder.jpg';
+                    return `
+                    <div class="flex gap-4 group">
+                        <div class="w-24 h-24 bg-surface-container-low rounded-xl p-2 flex items-center justify-center shrink-0">
+                            <img src="${img}" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex-grow space-y-1">
+                            <h4 class="font-bold text-sm line-clamp-1">${item.ten_sp}</h4>
+                            <p class="text-xs text-outline">Size: ${item.size || 'N/A'} | SL: ${item.so_luong}</p>
+                            <p class="font-bold text-primary">${formatPrice(price)}</p>
+                        </div>
+                        <button onclick="removeFromCart(${item.id}); updateCartUI();" class="text-outline hover:text-error transition-colors self-center">
+                            <span class="material-symbols-outlined text-lg">delete</span>
+                        </button>
+                    </div>`;
+                }).join('');
+                document.getElementById('cartTotal').textContent = formatPrice(total);
+            } catch (err) {
+                container.innerHTML = '<div class="text-center py-10 text-error text-xs">Lỗi tải giỏ hàng</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategoryProducts();
+            updateUserMenu();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

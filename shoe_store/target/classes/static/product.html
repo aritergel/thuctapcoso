@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Chi tiết sản phẩm - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            safelist: ['hover:bg-primary', 'hover:text-white', 'group-hover:opacity-100', 'group-hover:translate-y-0', 'bg-primary', 'text-white'],
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+
+        .product-image-container {
+            background: radial-gradient(circle at center, #ffffff 0%, #f3f0f1 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body">
+    <!-- Header -->
+    <header class="sticky top-0 w-full z-50 glass-nav shadow-sm">
+        <nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+            <div class="text-2xl font-black italic tracking-tighter text-stone-900 font-headline">
+                <a href="/">Shoeshop</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 font-label text-sm uppercase tracking-wider">
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=running">Chạy bộ</a>
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=training">Luyện tập</a>
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=lifestyle">Đời sống</a>
+                <a class="text-stone-600 hover:text-stone-900 transition-colors" href="/products?type=performance">Hiệu suất</a>
+            </div>
+            <div class="flex items-center space-x-6">
+                <button id="cartBtn" onclick="openCartModal()" class="material-symbols-outlined text-stone-900 hover:scale-105 transition-transform relative">
+                    shopping_cart
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+                <div id="userMenu"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-12 px-8 max-w-[1440px] mx-auto">
+        <div id="productDetail" class="min-h-[600px]">
+            <div class="flex justify-center items-center h-[600px]">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <section id="relatedProductsSection" class="mt-32 hidden">
+            <h2 class="font-headline text-3xl font-black italic uppercase mb-12 tracking-tight">Sản phẩm liên quan</h2>
+            <div id="relatedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+        </section>
+    </main>
+
+    <!-- Footer (Same as index) -->
+    <footer class="bg-inverse-surface text-white py-20 px-8 mt-32">
+        <!-- ... footer content ... -->
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-3xl font-black italic tracking-tighter mb-6 font-headline">Shoeshop</div>
+                <p class="text-stone-400 max-w-sm mx-auto md:mx-0 mb-8 leading-relaxed">Nâng tầm phong cách và hiệu suất của bạn với những đôi giày tốt nhất.</p>
+            </div>
+            <div>
+                <h4 class="font-headline font-bold mb-6 uppercase tracking-widest text-sm">Khám phá</h4>
+                <ul class="space-y-4 text-stone-400 text-sm">
+                    <li><a href="/products?type=running" class="hover:text-primary transition-colors">Giày chạy bộ</a></li>
+                    <li><a href="/products?type=training" class="hover:text-primary transition-colors">Giày tập luyện</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-headline font-bold mb-6 uppercase tracking-widest text-sm">Hỗ trợ</h4>
+                <ul class="space-y-4 text-stone-400 text-sm">
+                    <li><a href="#" class="hover:text-primary transition-colors">Trung tâm trợ giúp</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCartModal()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-background shadow-2xl p-8 flex flex-col transform translate-x-full transition-transform duration-500 ease-out" id="cartContent">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="font-headline text-3xl font-bold italic">Giỏ hàng</h2>
+                <button onclick="closeCartModal()" class="material-symbols-outlined text-stone-400 hover:text-on-surface transition-colors">close</button>
+            </div>
+            <div id="cartItems" class="flex-grow overflow-y-auto space-y-6"></div>
+            <div class="mt-8 pt-8 border-t border-outline-variant/30">
+                <div class="flex justify-between items-center mb-8">
+                    <span class="text-outline uppercase tracking-widest text-xs font-bold">Tổng cộng</span>
+                    <span id="cartTotal" class="font-headline text-2xl font-bold">0đ</span>
+                </div>
+                <button onclick="window.location.href='/checkout'" class="w-full primary-gradient text-white font-headline font-bold py-5 rounded-2xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        let selectedSize = null;
+        let quantity = 1;
+        let currentProduct = null;
+
+        async function loadProduct() {
+            const slug = window.location.pathname.split('/product/')[1];
+            if (!slug) { window.location.href = '/'; return; }
+
+            try {
+                const response = await fetch(`/api/products/${slug}`);
+                if (!response.ok) throw new Error('Product not found');
+                
+                const data = await response.json();
+                currentProduct = data.product;
+                document.title = `${currentProduct.ten_sp} - Shoeshop`;
+
+                const sizes = currentProduct.size ? currentProduct.size.split(',') : [];
+
+                document.getElementById('productDetail').innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        <div class="product-image-container rounded-[2.5rem] overflow-hidden aspect-square flex items-center justify-center p-12 lg:p-24 group">
+                            <img src="${currentProduct.hinh_anh || '/uploads/placeholder.jpg'}" 
+                                 class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                                 alt="${currentProduct.ten_sp}">
+                        </div>
+                        
+                        <div class="flex flex-col justify-center">
+                            <div class="space-y-4 mb-8">
+                                <p class="text-primary font-bold uppercase tracking-[0.3em] text-xs">${currentProduct.ten_danh_muc || 'Mới ra mắt'}</p>
+                                <h1 class="font-headline text-5xl font-black italic tracking-tight uppercase leading-tight">${currentProduct.ten_sp}</h1>
+                                <div class="flex items-center gap-6">
+                                    <div class="text-3xl font-bold text-on-surface">${formatPrice(currentProduct.gia_km || currentProduct.gia)}</div>
+                                    ${currentProduct.gia_km ? `<div class="text-xl text-outline line-through">${formatPrice(currentProduct.gia)}</div>` : ''}
+                                </div>
+                            </div>
+
+                            <p class="text-stone-600 leading-relaxed mb-10 text-lg">${currentProduct.mo_ta_ngan || ''}</p>
+
+                            <div class="space-y-8 mb-12">
+                                ${sizes.length > 0 ? `
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center">
+                                            <label class="text-xs font-black uppercase tracking-widest text-outline">Chọn kích cỡ (US)</label>
+                                            <a href="#" class="text-xs font-bold underline text-stone-400">Hướng dẫn size</a>
+                                        </div>
+                                        <div class="grid grid-cols-4 sm:grid-cols-6 gap-3">
+                                            ${sizes.map(size => `
+                                                <button onclick="selectSize('${size.trim()}', this)" 
+                                                    class="size-btn h-12 rounded-xl border-2 border-outline-variant/30 font-bold hover:border-primary transition-all">
+                                                    ${size.trim()}
+                                                </button>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+
+                                <div class="space-y-4">
+                                    <label class="text-xs font-black uppercase tracking-widest text-outline">Số lượng</label>
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex items-center bg-surface-container-high rounded-xl px-2">
+                                            <button onclick="changeQuantity(-1)" class="w-10 h-12 flex items-center justify-center text-xl font-bold">-</button>
+                                            <input type="number" id="quantityInput" value="1" min="1" max="${currentProduct.so_luong}" 
+                                                class="w-12 bg-transparent border-none text-center font-bold focus:ring-0" readonly>
+                                            <button onclick="changeQuantity(1)" class="w-10 h-12 flex items-center justify-center text-xl font-bold">+</button>
+                                        </div>
+                                        <span class="text-xs text-outline font-medium">Sẵn có: ${currentProduct.so_luong} đôi</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button onclick="handleAddToCart()" 
+                                    class="flex-grow primary-gradient text-white font-headline font-bold py-6 rounded-2xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest flex items-center justify-center gap-3">
+                                    <span class="material-symbols-outlined">shopping_cart</span>
+                                    Thêm vào giỏ hàng
+                                </button>
+                                <button class="w-full sm:w-20 h-20 rounded-2xl border-2 border-outline-variant/30 flex items-center justify-center hover:bg-error/5 hover:border-error transition-all group">
+                                    <span class="material-symbols-outlined text-stone-400 group-hover:text-error transition-colors">favorite</span>
+                                </button>
+                            </div>
+
+                            <div class="mt-12 pt-12 border-t border-outline-variant/30 space-y-6">
+                                <details class="group">
+                                    <summary class="flex justify-between items-center cursor-pointer list-none">
+                                        <span class="font-bold uppercase tracking-widest text-xs">Mô tả chi tiết</span>
+                                        <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                                    </summary>
+                                    <div class="mt-6 text-stone-600 text-sm leading-loose">
+                                        ${currentProduct.mo_ta_chi_tiet || 'Thông tin đang được cập nhật.'}
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (data.related && data.related.length > 0) {
+                    document.getElementById('relatedProductsSection').classList.remove('hidden');
+                    document.getElementById('relatedGrid').innerHTML = data.related.map(product => `
+                        <div class="group cursor-pointer" onclick="window.location.href='/product/${product.slug}'">
+                            <div class="relative aspect-[4/5] bg-surface-container-low rounded-2xl p-6 flex items-center justify-center overflow-hidden mb-6">
+                                <img src="${product.hinh_anh || '/uploads/placeholder.jpg'}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="font-bold mb-2 group-hover:text-primary transition-colors">${product.ten_sp}</h3>
+                            <p class="font-bold text-stone-900">${formatPrice(product.gia_km || product.gia)}</p>
+                        </div>
+                    `).join('');
+                }
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('productDetail').innerHTML = `<div class="text-center py-40">Sản phẩm không tồn tại. <a href="/" class="text-primary underline">Quay lại trang chủ</a></div>`;
+            }
+        }
+
+        function selectSize(size, btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('bg-on-surface', 'text-white', 'border-on-surface'));
+            btn.classList.add('bg-on-surface', 'text-white', 'border-on-surface');
+            selectedSize = size;
+        }
+
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantityInput');
+            let val = parseInt(input.value) + delta;
+            if (val >= 1 && val <= currentProduct.so_luong) {
+                input.value = val;
+                quantity = val;
+            }
+        }
+
+        function handleAddToCart() {
+            if (!selectedSize && currentProduct.size) {
+                showToast('Vui lòng chọn size', 'error');
+                return;
+            }
+            addToCart(currentProduct.id, quantity, selectedSize);
+        }
+
+        // Cart Modal & Auth (Same as category.html)
+        function openCartModal() {
+            document.getElementById('cartModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('cartContent').classList.remove('translate-x-full'), 10);
+            updateCartUI();
+        }
+        function closeCartModal() {
+            document.getElementById('cartContent').classList.add('translate-x-full');
+            setTimeout(() => document.getElementById('cartModal').classList.add('hidden'), 500);
+        }
+        async function updateCartUI() {
+            const container = document.getElementById('cartItems');
+            if (!container) return;
+            try {
+                const res = await fetch('/api/cart');
+                const data = await res.json();
+                const items = data.items || data.cart || [];
+                if (items.length === 0) {
+                    container.innerHTML = '<div class="text-center py-10 text-outline">Trống</div>';
+                    document.getElementById('cartTotal').textContent = '0đ';
+                    return;
+                }
+                let total = 0;
+                container.innerHTML = items.map(item => {
+                    const price = item.gia_km || item.gia;
+                    total += price * item.so_luong;
+                    return `
+                    <div class="flex gap-4">
+                        <div class="w-20 h-20 bg-surface-container-low rounded-xl p-2 flex items-center justify-center">
+                            <img src="${item.hinh_anh || '/uploads/placeholder.jpg'}" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex-grow space-y-1">
+                            <h4 class="font-bold text-xs">${item.ten_sp}</h4>
+                            <p class="text-[10px] text-outline">Size: ${item.size} | SL: ${item.so_luong}</p>
+                            <p class="font-bold text-primary text-sm">${formatPrice(price)}</p>
+                        </div>
+                    </div>`;
+                }).join('');
+                document.getElementById('cartTotal').textContent = formatPrice(total);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProduct();
+            updateUserMenu();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

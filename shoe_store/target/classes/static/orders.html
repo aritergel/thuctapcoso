@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Đơn hàng của tôi - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body">
+    <!-- Header -->
+    <header class="sticky top-0 w-full z-50 glass-nav shadow-sm">
+        <nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+            <div class="text-2xl font-black italic tracking-tighter text-stone-900 font-headline">
+                <a href="/">Shoeshop</a>
+            </div>
+            <div id="userMenu"></div>
+        </nav>
+    </header>
+
+    <main class="py-16 px-8 max-w-[1000px] mx-auto min-h-screen">
+        <!-- Order Detail Modal -->
+        <div id="orderModal" class="fixed inset-0 z-[110] hidden">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeOrderModal()"></div>
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-auto max-h-[90vh] bg-background rounded-[3rem] shadow-2xl overflow-hidden flex flex-col transform transition-all duration-500 scale-95 opacity-0" id="orderModalContent">
+                <div class="p-10 border-b border-outline-variant/10 flex justify-between items-center">
+                    <div>
+                        <h2 class="font-headline text-3xl font-black italic mb-1">Chi tiết đơn hàng</h2>
+                        <p id="modalOrderId" class="text-[10px] font-black uppercase tracking-widest text-outline"></p>
+                    </div>
+                    <button onclick="closeOrderModal()" class="w-12 h-12 rounded-full bg-surface-container-high hover:bg-outline-variant/10 flex items-center justify-center transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <div class="p-10 overflow-y-auto custom-scrollbar flex-grow">
+                    <div class="space-y-6 mb-10" id="modalOrderItems">
+                        <!-- Items load here -->
+                    </div>
+                    <div class="bg-surface-container-low rounded-3xl p-8 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-outline">Ngày đặt</span>
+                            <span id="modalOrderDate" class="text-xs font-bold"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-outline">Trạng thái</span>
+                            <span id="modalOrderStatus" class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-outline">Phương thức thanh toán</span>
+                            <span id="modalOrderPayment" class="text-xs font-bold">Thanh toán khi nhận hàng (COD)</span>
+                        </div>
+                        <div class="pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+                            <span class="text-lg font-black italic">Tổng cộng</span>
+                            <span id="modalOrderTotal" class="text-2xl font-black italic text-primary"></span>
+                        </div>
+                    </div>
+                    <div class="mt-8 space-y-2">
+                        <h4 class="text-[10px] font-black uppercase tracking-widest text-outline">Thông tin giao hàng</h4>
+                        <p id="modalOrderName" class="text-sm font-bold"></p>
+                        <p id="modalOrderPhone" class="text-sm text-outline"></p>
+                        <p id="modalOrderAddress" class="text-sm text-outline"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <h1 class="font-headline text-4xl font-black italic uppercase tracking-tight mb-4">Lịch sử đơn hàng</h1>
+            <p class="text-outline text-sm uppercase tracking-widest font-bold">Theo dõi và quản lý các đơn đặt hàng của bạn</p>
+        </div>
+
+        <div id="ordersContent" class="space-y-8">
+            <div class="flex justify-center py-20">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script>
+        let userOrders = [];
+
+        async function loadOrders() {
+            const container = document.getElementById('ordersContent');
+            try {
+                const res = await fetch('/api/orders');
+                if (res.status === 401) { window.location.href = '/login'; return; }
+                const data = await res.json();
+                
+                // Handle both {orders: []} and [] response formats
+                const orders = Array.isArray(data) ? data : (data.orders || []);
+                userOrders = orders;
+
+                if (orders.length === 0) {
+                    container.innerHTML = `
+                        <div class="py-20 text-center bg-surface-container-low rounded-[2.5rem]">
+                            <div class="material-symbols-outlined text-6xl text-outline mb-4">receipt_long</div>
+                            <h2 class="text-xl font-bold mb-2">Bạn chưa có đơn hàng nào</h2>
+                            <p class="text-outline mb-8">Hãy bắt đầu mua sắm ngay hôm nay!</p>
+                            <a href="/" class="primary-gradient text-white font-bold px-10 py-4 rounded-xl shadow-lg uppercase tracking-widest inline-block">Mua sắm ngay</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = orders.map(order => {
+                    const statusColors = {
+                        0: 'bg-secondary/10 text-secondary border-secondary/20', // Chờ xử lý
+                        1: 'bg-surface-tint/10 text-surface-tint border-surface-tint/20', // Đang giao
+                        2: 'bg-green-100 text-green-700 border-green-200', // Hoàn thành
+                        3: 'bg-error/10 text-error border-error/20' // Đã hủy
+                    };
+                    const statusText = {
+                        0: 'Đang chờ xử lý',
+                        1: 'Đang giao hàng',
+                        2: 'Đã hoàn thành',
+                        3: 'Đã hủy'
+                    };
+                    
+                    const statusClass = statusColors[order.trang_thai] || 'bg-stone-100 text-stone-600';
+                    const statusLabel = statusText[order.trang_thai] || 'Không xác định';
+
+                    return `
+                    <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-outline-variant/10 hover:shadow-md transition-shadow">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-outline-variant/10">
+                            <div>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-outline block mb-1">Mã đơn hàng</span>
+                                <h3 class="font-headline font-bold text-lg">#${order.ma_don}</h3>
+                            </div>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <div class="text-right hidden md:block">
+                                    <span class="text-[10px] font-black uppercase tracking-widest text-outline block mb-1">Ngày đặt</span>
+                                    <p class="text-xs font-bold">${new Date(order.ngay_dat).toLocaleDateString('vi-VN')}</p>
+                                </div>
+                                <div class="px-4 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-widest ${statusClass}">
+                                    ${statusLabel}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            ${order.items.map(item => `
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-surface-container-low rounded-lg p-2 shrink-0">
+                                        <img src="${item.hinh_anh || '/uploads/placeholder.jpg'}" class="w-full h-full object-contain">
+                                    </div>
+                                    <div class="flex-grow">
+                                        <h4 class="text-sm font-bold line-clamp-1">${item.ten_sp}</h4>
+                                        <p class="text-[10px] text-outline uppercase font-bold">Size: ${item.size} | SL: ${item.so_luong}</p>
+                                    </div>
+                                    <div class="text-sm font-bold">${formatPrice(item.gia * item.so_luong)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="flex justify-between items-center pt-6 border-t border-outline-variant/10">
+                            <button onclick="viewOrderDetail(${order.id})" class="text-[10px] font-black uppercase tracking-[0.2em] text-outline hover:text-primary transition-colors flex items-center gap-2">
+                                Xem chi tiết <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                            <div class="text-right">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-outline block mb-1">Tổng thanh toán</span>
+                                <p class="font-headline font-bold text-2xl italic text-primary">${formatPrice(order.tong_tien)}</p>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+
+            } catch (err) {
+                container.innerHTML = '<div class="py-20 text-center text-error">Lỗi khi tải lịch sử đơn hàng.</div>';
+            }
+        }
+
+        function viewOrderDetail(orderId) {
+            const order = userOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderModalContent');
+            
+            document.getElementById('modalOrderId').textContent = 'Đơn hàng #' + order.ma_don;
+            document.getElementById('modalOrderDate').textContent = new Date(order.ngay_dat).toLocaleDateString('vi-VN');
+            document.getElementById('modalOrderTotal').textContent = formatPrice(order.tong_tien);
+            
+            // Status
+            const statusLabel = document.getElementById('modalOrderStatus');
+            const statusText = { 0: 'Đang chờ xử lý', 1: 'Đang giao hàng', 2: 'Đã hoàn thành', 3: 'Đã hủy' };
+            const statusColors = { 
+                0: 'bg-primary/10 text-primary border-primary/20',
+                1: 'bg-secondary/10 text-secondary border-secondary/20',
+                2: 'bg-green-100 text-green-700 border-green-200',
+                3: 'bg-error/10 text-error border-error/20'
+            };
+            statusLabel.textContent = statusText[order.trang_thai] || 'Không xác định';
+            statusLabel.className = 'px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ' + (statusColors[order.trang_thai] || '');
+
+            // Delivery Info
+            document.getElementById('modalOrderName').textContent = order.ho_ten;
+            document.getElementById('modalOrderPhone').textContent = order.so_dien_thoai;
+            document.getElementById('modalOrderAddress').textContent = order.dia_chi;
+
+            // Items
+            const itemsContainer = document.getElementById('modalOrderItems');
+            itemsContainer.innerHTML = order.items.map(item => `
+                <div class="flex items-center gap-6 group">
+                    <div class="w-20 h-20 bg-surface-container-low rounded-2xl p-3 shrink-0 flex items-center justify-center">
+                        <img src="${item.hinh_anh || '/uploads/placeholder.jpg'}" class="w-full h-full object-contain group-hover:scale-110 transition-transform">
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-lg leading-tight mb-1">${item.ten_sp}</h4>
+                        <p class="text-[10px] text-outline font-black uppercase tracking-widest">Size: ${item.size} | Số lượng: ${item.so_luong}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-black italic text-lg">${formatPrice(item.gia * item.so_luong)}</p>
+                        <p class="text-[10px] text-outline">${formatPrice(item.gia)} / sản phẩm</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Show
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderModalContent');
+            content.classList.add('scale-95', 'opacity-0');
+            content.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrders();
+            updateUserMenu();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

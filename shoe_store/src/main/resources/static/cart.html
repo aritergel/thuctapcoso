@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Giỏ hàng - Shoeshop</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f9f6f7",
+                        "primary-dim": "#942a00",
+                        "surface-tint": "#a83100",
+                        "surface": "#f9f6f7",
+                        "inverse-surface": "#0e0e0f",
+                        "on-surface": "#2f2e2f",
+                        "on-secondary-fixed-variant": "#0040cd",
+                        "on-error-container": "#570008",
+                        "surface-dim": "#d6d4d5",
+                        "on-background": "#2f2e2f",
+                        "tertiary": "#5c5b5c",
+                        "outline": "#787677",
+                        "on-secondary-container": "#0039b8",
+                        "primary-fixed": "#ff784d",
+                        "surface-container-highest": "#dfdcde",
+                        "on-primary": "#ffefeb",
+                        "error-dim": "#9f0519",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#f9f6f7",
+                        "tertiary-fixed": "#ffffff",
+                        "primary-fixed-dim": "#ff5d24",
+                        "on-tertiary-container": "#636263",
+                        "secondary": "#0049e6",
+                        "secondary-fixed-dim": "#b3c1ff",
+                        "on-tertiary-fixed-variant": "#6e6d6e",
+                        "surface-variant": "#dfdcde",
+                        "inverse-primary": "#ff5718",
+                        "surface-container-low": "#f3f0f1",
+                        "primary": "#a83100",
+                        "error": "#b31b25",
+                        "on-tertiary": "#f5f2f3",
+                        "tertiary-dim": "#504f50",
+                        "secondary-fixed": "#c6cfff",
+                        "error-container": "#fb5151",
+                        "tertiary-fixed-dim": "#f3f0f1",
+                        "primary-container": "#ff784d",
+                        "on-primary-fixed-variant": "#561500",
+                        "secondary-container": "#c6cfff",
+                        "secondary-dim": "#0040cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffefee",
+                        "on-primary-container": "#460f00",
+                        "surface-container-high": "#e4e2e3",
+                        "on-surface-variant": "#5c5b5c",
+                        "tertiary-container": "#ffffff",
+                        "inverse-on-surface": "#9e9c9d",
+                        "surface-container": "#eae7e9",
+                        "outline-variant": "#afacad",
+                        "on-secondary-fixed": "#00298b",
+                        "on-tertiary-fixed": "#515051",
+                        "on-secondary": "#f2f1ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Lexend"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #a83100 0%, #ff5718 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body">
+    <!-- Header -->
+    <header class="sticky top-0 w-full z-50 glass-nav shadow-sm">
+        <nav class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+            <div class="text-2xl font-black italic tracking-tighter text-stone-900 font-headline">
+                <a href="/">Shoeshop</a>
+            </div>
+            <div class="flex items-center space-x-6">
+                <div id="userMenu"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-16 px-8 max-w-[1200px] mx-auto">
+        <h1 class="font-headline text-4xl font-black italic mb-12 uppercase tracking-tight">Giỏ hàng của bạn</h1>
+
+        <div id="cartPageContent" class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Loading -->
+            <div class="col-span-full py-20 flex justify-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script>
+        async function loadCartPage() {
+            const container = document.getElementById('cartPageContent');
+            try {
+                const response = await fetch('/api/cart');
+                const data = await response.json();
+                const items = data.items || data.cart || [];
+
+                if (items.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-span-full py-20 text-center">
+                            <div class="material-symbols-outlined text-6xl text-outline mb-6">shopping_basket</div>
+                            <h2 class="text-2xl font-bold mb-4">Giỏ hàng trống</h2>
+                            <p class="text-outline mb-10">Bạn chưa thêm sản phẩm nào vào giỏ hàng.</p>
+                            <a href="/" class="primary-gradient text-white font-bold px-10 py-4 rounded-xl shadow-lg uppercase tracking-widest inline-block">Tiếp tục mua sắm</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let subtotal = 0;
+                const itemsHtml = items.map(item => {
+                    const price = item.gia_km || item.gia;
+                    subtotal += price * item.so_luong;
+                    return `
+                        <div class="flex flex-col sm:flex-row gap-6 p-6 bg-surface-container-low rounded-3xl border border-outline-variant/10 group">
+                            <div class="w-full sm:w-32 h-32 bg-white rounded-2xl p-4 flex items-center justify-center shrink-0">
+                                <img src="${item.hinh_anh || '/uploads/placeholder.jpg'}" class="w-full h-full object-contain group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex-grow flex flex-col justify-between py-2">
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">${item.ten_sp}</h3>
+                                    <p class="text-xs text-outline font-bold uppercase tracking-widest mb-2">${item.ten_danh_muc || 'Thể thao'}</p>
+                                    <p class="text-sm font-medium">Kích cỡ: <span class="font-bold">${item.size || 'N/A'}</span></p>
+                                </div>
+                                <div class="flex items-center gap-4 mt-4 sm:mt-0">
+                                    <div class="flex items-center bg-surface-container-high rounded-xl px-2">
+                                        <button onclick="updateCartItemQty(${item.product_id}, -1)" class="w-8 h-10 flex items-center justify-center font-bold">-</button>
+                                        <span class="w-8 text-center font-bold text-sm">${item.so_luong}</span>
+                                        <button onclick="updateCartItemQty(${item.product_id}, 1)" class="w-8 h-10 flex items-center justify-center font-bold">+</button>
+                                    </div>
+                                    <button onclick="removeFromCart(${item.product_id})" class="text-xs font-bold text-error hover:underline uppercase tracking-widest ml-auto">Xóa</button>
+                                </div>
+                            </div>
+                            <div class="text-right flex flex-col justify-center">
+                                <p class="font-bold text-xl">${formatPrice(price * item.so_luong)}</p>
+                                <p class="text-[10px] text-outline">${formatPrice(price)} / chiếc</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.innerHTML = `
+                    <div class="lg:col-span-2 space-y-6">
+                        ${itemsHtml}
+                    </div>
+                    <div class="lg:col-span-1">
+                        <div class="bg-surface-container-high rounded-3xl p-8 sticky top-32">
+                            <h2 class="font-headline text-xl font-bold uppercase tracking-widest mb-8 pb-4 border-b border-outline-variant/20">Tổng kết đơn hàng</h2>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-outline font-bold uppercase tracking-widest">Tạm tính</span>
+                                    <span class="font-bold">${formatPrice(subtotal)}</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-outline font-bold uppercase tracking-widest">Giao hàng</span>
+                                    <span class="text-secondary font-bold uppercase tracking-widest">Miễn phí</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mb-10 pt-6 border-t border-outline-variant/20">
+                                <span class="font-headline font-bold text-lg uppercase tracking-tight italic">Tổng cộng</span>
+                                <span class="font-headline font-bold text-3xl italic">${formatPrice(subtotal)}</span>
+                            </div>
+                            <button onclick="window.location.href='/checkout'" class="w-full primary-gradient text-white font-headline font-bold py-6 rounded-2xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest">
+                                Tiến hành đặt hàng
+                            </button>
+                            <p class="text-[10px] text-center text-outline mt-6 font-bold uppercase tracking-widest">Giao hàng miễn phí toàn quốc</p>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = '<div class="col-span-full py-20 text-center text-error">Đã xảy ra lỗi khi tải giỏ hàng.</div>';
+            }
+        }
+
+        async function updateCartItemQty(id, delta) {
+            // Logic handled by main.js if available, or custom here
+            // Assuming main.js has updateCartCount, but for direct qty change:
+            try {
+                const res = await fetch('/api/cart/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ product_id: id, delta })
+                });
+                if (res.ok) loadCartPage();
+            } catch (e) {}
+        }
+
+        function updateNavUserMenu() {
+            const container = document.getElementById('userMenu');
+            fetch('/api/auth/me').then(res => res.json()).then(data => {
+                if (data.user) {
+                    container.innerHTML = `<button onclick="window.location.href='/account'" class="flex items-center gap-2 font-bold uppercase tracking-widest text-xs hover:text-primary transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">${data.user.ho_ten.charAt(0)}</div>
+                        ${data.user.ho_ten}
+                    </button>`;
+                } else {
+                    container.innerHTML = `<a href="/login" class="text-sm font-bold hover:text-primary transition-colors uppercase tracking-widest">Đăng nhập</a>`;
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCartPage();
+            updateNavUserMenu();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
